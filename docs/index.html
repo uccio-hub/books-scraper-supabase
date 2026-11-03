@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore a catalogue of 1,000 books by category, price and rating.">
+  <title>Leaf & Letter — Book Catalogue</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Leaf and Letter home">
+      <span class="brand-mark">L</span>
+      <span>Leaf <i>&</i> Letter</span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#catalogue">Catalogue</a>
+      <a href="#about">About</a>
+    </nav>
+    <button class="saved-button" id="savedButton" type="button" aria-label="Show saved books">
+      <span>Saved</span><strong id="savedCount">0</strong>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">A CURATED DIGITAL SHELF</p>
+        <h1>Find the book that<br><em>stays with you.</em></h1>
+        <p class="hero-text">Explore 1,000 titles across fiction, history, poetry, travel and more. Search, compare and save your next read.</p>
+        <a class="hero-link" href="#catalogue">Browse the catalogue <span>↓</span></a>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="sun"></div>
+        <div class="book-stack"><span></span><span></span><span></span><span></span></div>
+        <div class="leaf leaf-one"></div><div class="leaf leaf-two"></div><div class="leaf leaf-three"></div>
+      </div>
+    </section>
+
+    <section class="catalogue" id="catalogue">
+      <div class="section-heading">
+        <div><p class="eyebrow">DISCOVER</p><h2>Browse all books</h2></div>
+        <p id="resultCount" aria-live="polite">Loading catalogue…</p>
+      </div>
+
+      <div class="toolbar" aria-label="Book filters">
+        <label class="search-field">
+          <span class="sr-only">Search by title</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+          <input id="searchInput" type="search" placeholder="Search by title…" autocomplete="off">
+        </label>
+        <label><span class="sr-only">Category</span><select id="categoryFilter"><option value="">All categories</option></select></label>
+        <label><span class="sr-only">Minimum rating</span><select id="ratingFilter"><option value="">Any rating</option><option value="5">5 stars</option><option value="4">4+ stars</option><option value="3">3+ stars</option><option value="2">2+ stars</option></select></label>
+        <label><span class="sr-only">Sort books</span><select id="sortFilter"><option value="title-asc">Title A–Z</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option><option value="rating-desc">Highest rated</option></select></label>
+        <button class="filter-reset" id="resetFilters" type="button">Reset</button>
+      </div>
+
+      <div class="setup-notice hidden" id="setupNotice">
+        <h3>Connect this catalogue to Supabase</h3>
+        <p>Add your Project URL and Publishable key to <code>config.js</code>, then refresh the page.</p>
+      </div>
+      <div class="error-notice hidden" id="errorNotice" role="alert"></div>
+      <div class="book-grid" id="bookGrid" aria-live="polite"></div>
+      <div class="skeleton-grid" id="skeletonGrid" aria-hidden="true"></div>
+
+      <nav class="pagination hidden" id="pagination" aria-label="Catalogue pages">
+        <button id="previousPage" type="button">← Previous</button>
+        <span id="pageInfo">Page 1</span>
+        <button id="nextPage" type="button">Next →</button>
+      </nav>
+    </section>
+
+    <section class="about" id="about">
+      <p class="eyebrow">ABOUT THE PROJECT</p>
+      <h2>From raw pages to a searchable collection.</h2>
+      <p>This catalogue is powered by a Python data pipeline and Supabase. The source data is collected from Books to Scrape, a sandbox built for web-scraping practice.</p>
+      <div class="about-stats"><div><strong>1,000</strong><span>Books</span></div><div><strong>50</strong><span>Source pages</span></div><div><strong>1</strong><span>Live catalogue</span></div></div>
+    </section>
+  </main>
+
+  <footer><span>© 2026 Leaf & Letter</span><span>Built with Python + Supabase</span></footer>
+
+  <dialog id="bookDialog">
+    <button class="dialog-close" id="closeDialog" type="button" aria-label="Close">×</button>
+    <div id="dialogContent"></div>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
